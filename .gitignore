@@ -1,0 +1,7 @@
+libccmodbus.config
+libccmodbus.creator
+libccmodbus.creator.*
+libccmodbus.files
+libccmodbus.includes
+
+build/
