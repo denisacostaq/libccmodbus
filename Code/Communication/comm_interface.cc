@@ -25,8 +25,8 @@
     limitations under the License.
  */
 
-#include "comm_interface.h"
+#include "Communication/comm_interface.h"
 
-CommInterface::CommInterface()
+namespace COMMUNICATION
 {
-}
+}  //namespace COMMUNICATION

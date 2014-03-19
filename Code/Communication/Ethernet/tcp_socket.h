@@ -1,6 +1,6 @@
-/*! \file serial_portrs_232.cc
+/*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:55:16 CDT 2014
+    \date Tue Mar 18 19:48:14 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,8 +25,28 @@
     limitations under the License.
  */
 
-#include "Communication/RTU/serial_portrs_232.h"
+#ifndef COMMUNICATION_ETHERNET_TCP_SOCKET_H
+#define COMMUNICATION_ETHERNET_TCP_SOCKET_H
+
+#include "Communication/comm_interface.h"
+#include "Communication/Ethernet/qtcp_socket_adapter.h"
 
 namespace COMMUNICATION
 {
+class TcpSocket : public CommInterface
+{
+  public:
+    TcpSocket();
+    ~TcpSocket();
+
+    TcpSocket(const TcpSocket&) = delete;
+    TcpSocket& operator=(const TcpSocket&) = delete;
+
+    TcpSocket(const TcpSocket&&) = delete;
+    TcpSocket& operator=(const TcpSocket&&) = delete;
+
+  private:
+    CommAdapterInterface *m_tcp_socket;
+};
 }  //namespace COMMUNICATION
+#endif // COMMUNICATION_ETHERNET_TCP_SOCKET_H

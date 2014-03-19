@@ -31,7 +31,9 @@ include_directories(Code)
 
 set(libccmodbus_Code
   Code/Communication/comm_interface.cc
-  Code/Communication/Ethernet/eth_tcp.cc
+  Code/Communication/comm_adapter_interface.cc
+  Code/Communication/Ethernet/qtcp_socket_adapter.cc
+  Code/Communication/Ethernet/tcp_socket.cc
   Code/Communication/RTU/serial_portrs_232.cc
 )
 

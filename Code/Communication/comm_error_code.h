@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Tue Mar 18 22:36:52 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,20 +25,18 @@
     limitations under the License.
  */
 
-#ifndef COMMUNICATION_ETHERNET_ETH_TCP_H
-#define COMMUNICATION_ETHERNET_ETH_TCP_H
+#ifndef COMMUNICATION_COMM_ERROR_CODE_H
+#define COMMUNICATION_COMM_ERROR_CODE_H
 
-#include "Communication/comm_interface.h"
-class EthTCP : public CommInterface
+namespace COMMUNICATION
 {
-  public:
-    EthTCP();
-
-    EthTCP(const EthTCP&) = delete;
-    EthTCP& operator=(const EthTCP&) = delete;
-
-    EthTCP(const EthTCP&&) = delete;
-    EthTCP& operator=(const EthTCP&&) = delete;
+enum class CommErrorCode
+{
+  Ok,
+  connecFail,
+  disconnectFail,
+  readFail,
+  writeFail
 };
-
-#endif // COMMUNICATION_ETHERNET_ETH_TCP_H
+}  //namespace COMMUNICATION
+#endif // COMMUNICATION_COMM_ERROR_CODE_H

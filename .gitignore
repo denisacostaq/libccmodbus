@@ -5,3 +5,4 @@ libccmodbus.files
 libccmodbus.includes
 
 build/
+Doc/

@@ -1,6 +1,6 @@
-/*! \file serial_portrs_232.cc
+/*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:55:16 CDT 2014
+    \date Tue Mar 18 23:30:39 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,8 +25,28 @@
     limitations under the License.
  */
 
-#include "Communication/RTU/serial_portrs_232.h"
+#ifndef COMMUNICATION_ETHERNET_QTCP_SOCKET_ADAPTER_H
+#define COMMUNICATION_ETHERNET_QTCP_SOCKET_ADAPTER_H
 
-namespace COMMUNICATION
+#include "Communication/comm_adapter_interface.h"
+
+namespace COMMUNICATION {
+class QTcpSocketAdapter : public CommAdapterInterface
 {
+  public:
+    QTcpSocketAdapter() = default;
+    ~QTcpSocketAdapter() = default;
+
+    QTcpSocketAdapter(const QTcpSocketAdapter&) = delete;
+    QTcpSocketAdapter& operator=(const QTcpSocketAdapter&) = delete;
+
+    QTcpSocketAdapter(const QTcpSocketAdapter&&) = delete;
+    QTcpSocketAdapter& operator=(const QTcpSocketAdapter&&) = delete;
+
+    virtual CommErrorCode connect(int timeout) override;
+    virtual CommErrorCode disconnect(int timeout) override;
+    virtual CommErrorCode read(int timeout, char *data, int *n_bytes) override;
+    virtual CommErrorCode write(int timeout, const char *data, int *n_bytes) override;
+};
 }  //namespace COMMUNICATION
+#endif // COMMUNICATION_ETHERNET_QTCP_SOCKET_ADAPTER_H

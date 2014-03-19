@@ -1,6 +1,6 @@
-/*! \file serial_portrs_232.cc
+/*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:55:16 CDT 2014
+    \date Tue Mar 18 23:30:39 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,8 +25,7 @@
     limitations under the License.
  */
 
-#include "Communication/RTU/serial_portrs_232.h"
-
+#include "qtcp_socket_adapter.h"
 namespace COMMUNICATION
 {
 }  //namespace COMMUNICATION

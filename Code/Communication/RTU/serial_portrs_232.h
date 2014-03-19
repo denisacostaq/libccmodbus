@@ -29,10 +29,14 @@
 #define COMMUNICATION_RTU_SERIAL_PORTRS_232_H
 
 #include "Communication/comm_interface.h"
+
+namespace COMMUNICATION
+{
 class SerialPortRS_232 : public CommInterface
 {
   public:
-    SerialPortRS_232();
+    SerialPortRS_232() = default;
+    ~SerialPortRS_232() = default;
 
     SerialPortRS_232(const SerialPortRS_232&) = delete;
     SerialPortRS_232& operator=(const SerialPortRS_232&) = delete;
@@ -40,5 +44,5 @@ class SerialPortRS_232 : public CommInterface
     SerialPortRS_232(const SerialPortRS_232&&) = delete;
     SerialPortRS_232& operator=(const SerialPortRS_232&&) = delete;
 };
-
+}  //namespace COMMUNICATION
 #endif // COMMUNICATION_RTU_SERIAL_PORTRS_232_H

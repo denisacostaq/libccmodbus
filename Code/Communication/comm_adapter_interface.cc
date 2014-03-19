@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Tue Mar 18 23:18:44 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,8 +25,7 @@
     limitations under the License.
  */
 
-#include "eth_tcp.h"
-
-EthTCP::EthTCP()
+#include "Communication/comm_adapter_interface.h"
+namespace COMMUNICATION
 {
-}
+}  //namespace COMMUNICATION
