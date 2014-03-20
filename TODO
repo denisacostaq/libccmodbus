@@ -1,0 +1,2 @@
+In a large or complicated class hierarchy with many virtual functions, it is best to use virtual
+only to introduce a new virtual function and to use override on all functions intended as overriders.

@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Wed Mar 19 08:32:25 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,18 +25,4 @@
     limitations under the License.
  */
 
-#include "Communication/Ethernet/tcp_socket.h"
-
-namespace COMMUNICATION
-{
-  TcpSocket::TcpSocket(QString remot_server, int remot_server_port)
-    : m_tcp_socket {new QTcpSocketAdapter(remot_server, remot_server_port)}
-  {}
-
-  TcpSocket::~TcpSocket()
-  {
-    delete m_tcp_socket;
-  }
-
-
-}  //namespace COMMUNICATION
+#include "modbus_point.h"

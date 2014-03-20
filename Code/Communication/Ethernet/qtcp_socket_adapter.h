@@ -28,13 +28,16 @@
 #ifndef COMMUNICATION_ETHERNET_QTCP_SOCKET_ADAPTER_H
 #define COMMUNICATION_ETHERNET_QTCP_SOCKET_ADAPTER_H
 
+#include <QtCore/QString>
+#include <QtNetwork/QTcpSocket>
+
 #include "Communication/comm_adapter_interface.h"
 
 namespace COMMUNICATION {
 class QTcpSocketAdapter : public CommAdapterInterface
 {
   public:
-    QTcpSocketAdapter() = default;
+    QTcpSocketAdapter(QString remot_server, int remot_server_port);
     ~QTcpSocketAdapter() = default;
 
     QTcpSocketAdapter(const QTcpSocketAdapter&) = delete;
@@ -43,10 +46,16 @@ class QTcpSocketAdapter : public CommAdapterInterface
     QTcpSocketAdapter(const QTcpSocketAdapter&&) = delete;
     QTcpSocketAdapter& operator=(const QTcpSocketAdapter&&) = delete;
 
-    virtual CommErrorCode connect(int timeout) override;
-    virtual CommErrorCode disconnect(int timeout) override;
-    virtual CommErrorCode read(int timeout, char *data, int *n_bytes) override;
-    virtual CommErrorCode write(int timeout, const char *data, int *n_bytes) override;
+    CommErrorCode connect(int timeout) override;
+    CommErrorCode disconnect(int timeout) override;
+    CommErrorCode read(int timeout, char *data, int *n_bytes) override;
+    CommErrorCode write(int timeout, const char *data, int *n_bytes) override;
+
+  private:
+    QString m_server;
+    int m_server_port;
+
+    QTcpSocket m_socket;
 };
 }  //namespace COMMUNICATION
 #endif // COMMUNICATION_ETHERNET_QTCP_SOCKET_ADAPTER_H

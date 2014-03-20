@@ -28,4 +28,35 @@
 #include "qtcp_socket_adapter.h"
 namespace COMMUNICATION
 {
+  QTcpSocketAdapter::QTcpSocketAdapter(QString remot_server, int remot_server_port)
+    : m_server{remot_server},
+        m_server_port{remot_server_port},
+        m_socket{}
+  {
+  }
+
+  CommErrorCode QTcpSocketAdapter::connect(int timeout)
+  {
+    m_socket.connectToHost(m_server, m_server_port);
+    if (m_socket.waitForConnected(timeout))
+    {
+      return CommErrorCode::Ok;
+    }
+    else
+    {
+      qDebug() << m_socket.errorString();
+      switch (m_socket.error())
+      {
+        case QAbstractSocket::SocketError::ConnectionRefusedError:
+          return CommErrorCode::connecFail;
+          break;
+        case QAbstractSocket::SocketError::TemporaryError:
+          return CommErrorCode::timeout;
+          break;
+        default:
+          break;
+      }
+      return CommErrorCode::unknownError;
+    }
+  }
 }  //namespace COMMUNICATION

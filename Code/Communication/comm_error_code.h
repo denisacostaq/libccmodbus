@@ -36,7 +36,9 @@ enum class CommErrorCode
   connecFail,
   disconnectFail,
   readFail,
-  writeFail
+  writeFail,
+  timeout,
+  unknownError
 };
 }  //namespace COMMUNICATION
 #endif // COMMUNICATION_COMM_ERROR_CODE_H

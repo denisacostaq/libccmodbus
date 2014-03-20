@@ -36,7 +36,7 @@ namespace COMMUNICATION
 class TcpSocket : public CommInterface
 {
   public:
-    TcpSocket();
+    TcpSocket(QString remot_server, int remot_server_port);
     ~TcpSocket();
 
     TcpSocket(const TcpSocket&) = delete;
@@ -44,6 +44,22 @@ class TcpSocket : public CommInterface
 
     TcpSocket(const TcpSocket&&) = delete;
     TcpSocket& operator=(const TcpSocket&&) = delete;
+
+    inline CommErrorCode connect(int timeout) override {
+      return m_tcp_socket->connect(timeout);
+    }
+
+    inline CommErrorCode disconnect(int timeout) override {
+      return m_tcp_socket->disconnect(timeout);
+    }
+
+    inline CommErrorCode read(int timeout, char *data, int *n_bytes) override {
+      return m_tcp_socket->read(timeout, data, n_bytes);
+    }
+
+    inline CommErrorCode write(int timeout, const char *data, int *n_bytes) override {
+      return m_tcp_socket->write(timeout, data, n_bytes);
+    }
 
   private:
     CommAdapterInterface *m_tcp_socket;
