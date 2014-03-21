@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Thu Mar 20 10:27:32 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,18 +25,24 @@
     limitations under the License.
  */
 
-#include "Communication/Ethernet/tcp_socket.h"
+#include "modbus_client.h"
 
-namespace COMMUNICATION
-{
-  TcpSocket::TcpSocket(QString host, int32_t host_port)
-    : m_tcp_socket {new QTcpSocketAdapter(host, host_port)}
-  {}
-
-  TcpSocket::~TcpSocket()
+namespace PROTOCOL {
+  ModbusClient::ModbusClient(char *host, u_int16_t host_port)    
+    : m_transport{new COMMUNICATION::TcpSocket{host, host_port}}
   {
-    delete m_tcp_socket;
   }
 
-
-}  //namespace COMMUNICATION
+  ModbusClient::ModbusClient(SERIAL_PORT::BaudRate baudrate,
+                             SERIAL_PORT::DataBits databits,
+                             SERIAL_PORT::Parity parity,
+                             SERIAL_PORT::StopBits stop_bits,
+                             SERIAL_PORT::FlowControl flow_control)
+    : m_transport{new COMMUNICATION::SerialPortRS_232{baudrate,
+                                                      databits,
+                                                      parity,
+                                                      stop_bits,
+                                                      flow_control}}
+  {
+  }
+}

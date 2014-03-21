@@ -1,0 +1,16 @@
+include(InstallRequiredSystemLibraries)
+
+#TODO
+set(CPACK_PACKAGE_VENDOR "Evan Bollig")
+#set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "An Example of Packaged Source")
+
+
+#set(CPACK_GENERATOR "TGZ"), esto desabilita el .sh
+set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
+set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/README)
+
+# version for tarball name:
+set(CPACK_PACKAGE_VERSION_MAJOR "${libccmodbus_VERSION_MAJOR}")
+set(CPACK_PACKAGE_VERSION_MINOR "${libccmodbus_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${libccmodbus_VERSION_PATCH}")
+include(CPack)

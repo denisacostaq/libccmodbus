@@ -61,6 +61,11 @@ set(libccmodbus_Code
   ${ENGINE_SRC}
   Code/Communication/Ethernet/tcp_socket.cc
   Code/Communication/RTU/serial_portrs_232.cc
+  Code/Communication/RTU/qserial_port_adapter.cc
+  Code/modbus_client.cc
+  Code/modbus_interface.cc
+  Code/modbus_tcp.cc
+  Code/modbus_factory.cc
 )
 
 add_library(ccmodbus
@@ -68,7 +73,7 @@ add_library(ccmodbus
 )
 
 # Use the Network module from Qt 5.
-qt5_use_modules(ccmodbus Network)
+qt5_use_modules(ccmodbus Network SerialPort)
 
 #CMAKE_INSTALL_PREFIX(/tmp)
 #add_subdirectory(tests)
@@ -78,11 +83,6 @@ install(TARGETS ccmodbus DESTINATION lib)
 install(FILES Code/modbus_point.h DESTINATION include)
 #install(FILES "${PROJECT_BINARY_DIR}/TutorialConfig.h" DESTINATION include)
 
-include(InstallRequiredSystemLibraries)
-#set(CPACK_GENERATOR "TGZ"), esto desabilita el .sh
-set(CPACK_RESOURCE_FILE_LICENSE "${PROJECT_SOURCE_DIR}/LICENSE")
-set(CPACK_PACKAGE_VERSION_MAJOR "${libccmodbus_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${libccmodbus_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${libccmodbus_VERSION_PATCH}")
-include(CPack)
+include(CMakeCpack.txt)
+include(Doc/CMakeDoc.txt)
 

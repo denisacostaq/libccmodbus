@@ -29,4 +29,16 @@
 
 namespace COMMUNICATION
 {
+  SerialPortRS_232::SerialPortRS_232(SERIAL_PORT::BaudRate baudrate,
+                                     SERIAL_PORT::DataBits databits,
+                                     SERIAL_PORT::Parity parity,
+                                     SERIAL_PORT::StopBits stop_bits,
+                                     SERIAL_PORT::FlowControl flow_control)
+    : m_serial_port{new QSerialPortAdapter{baudrate,
+                                           databits,
+                                           parity,
+                                           stop_bits,
+                                           flow_control}}
+  {
+  }
 }  //namespace COMMUNICATION

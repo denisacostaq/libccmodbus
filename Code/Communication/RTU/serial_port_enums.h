@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Thu Mar 20 23:23:39 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,18 +25,56 @@
     limitations under the License.
  */
 
-#include "Communication/Ethernet/tcp_socket.h"
+#ifndef SERIAL_PORT_ENUMS_H
+#define SERIAL_PORT_ENUMS_H
 
-namespace COMMUNICATION
+namespace SERIAL_PORT {
+enum class BaudRate
 {
-  TcpSocket::TcpSocket(QString host, int32_t host_port)
-    : m_tcp_socket {new QTcpSocketAdapter(host, host_port)}
-  {}
+    Baud1200 = 1200,
+    Baud2400 = 2400,
+    Baud4800 = 4800,
+    Baud9600 = 9600,
+    Baud19200 = 19200,
+    Baud38400 = 38400,
+    Baud57600 = 57600,
+    Baud115200 = 115200,
+    UnknownBaud = -1
+};
 
-  TcpSocket::~TcpSocket()
-  {
-    delete m_tcp_socket;
-  }
+enum class DataBits
+{
+    Data5 = 5,
+    Data6 = 6,
+    Data7 = 7,
+    Data8 = 8,
+    UnknownDataBits = -1
+};
 
+enum class Parity
+{
+    NoParity = 0,
+    EvenParity = 2,
+    OddParity = 3,
+    SpaceParity = 4,
+    MarkParity = 5,
+    UnknownParity = -1
+};
 
-}  //namespace COMMUNICATION
+enum class StopBits
+{
+    OneStop = 1,
+    OneAndHalfStop = 3,
+    TwoStop = 2,
+    UnknownStopBits = -1
+};
+
+enum class FlowControl
+{
+    NoFlowControl,
+    HardwareControl,
+    SoftwareControl,
+    UnknownFlowControl = -1
+};
+}
+#endif // SERIAL_PORT_ENUMS_H

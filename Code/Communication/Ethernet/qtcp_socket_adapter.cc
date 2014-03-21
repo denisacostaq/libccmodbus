@@ -28,21 +28,21 @@
 #include "qtcp_socket_adapter.h"
 namespace COMMUNICATION
 {
-  QTcpSocketAdapter::QTcpSocketAdapter(QString remot_server, int remot_server_port)
-    : m_server{remot_server},
-        m_server_port{remot_server_port},
+  QTcpSocketAdapter::QTcpSocketAdapter(QString host, int32_t host_port)
+    : m_server{host},
+        m_server_port{host_port},
         m_socket{}
   {
   }
 
-  CommErrorCode QTcpSocketAdapter::connect(int timeout)
+  CommErrorCode QTcpSocketAdapter::connect(int32_t timeout)
   {
     m_socket.connectToHost(m_server, m_server_port);
     if (m_socket.waitForConnected(timeout))
     {
       return CommErrorCode::Ok;
     }
-    else
+    else if (m_socket.state() == QAbstractSocket::SocketState::UnconnectedState)
     {
       qDebug() << m_socket.errorString();
       switch (m_socket.error())
@@ -54,9 +54,66 @@ namespace COMMUNICATION
           return CommErrorCode::timeout;
           break;
         default:
+          return CommErrorCode::unknownError;
           break;
-      }
+      }      
+    }
+    else
+    {
       return CommErrorCode::unknownError;
     }
+  }
+
+  CommErrorCode QTcpSocketAdapter::disconnect(int32_t timeout)
+  {
+    m_socket.disconnectFromHost();
+    m_socket.waitForDisconnected(timeout);
+    if(m_socket.state() == QTcpSocket::SocketState::UnconnectedState)
+    {
+      return CommErrorCode::Ok;
+    }
+    else
+    {
+        qDebug() << m_socket.errorString();
+        return CommErrorCode::unknownError;
+    }
+  }
+
+  CommErrorCode QTcpSocketAdapter::read(int timeout, char *data, int *n_bytes)
+  {
+    m_socket.waitForReadyRead(timeout);
+    if (qint64 ret = m_socket.read(data, *n_bytes) > 0)
+    {
+      if (ret == *n_bytes)
+      {
+        return CommErrorCode::Ok;
+      }
+      else
+      {
+        //*n_bytes = *n_bytes - ret;
+        return CommErrorCode::readFail;
+      }
+    }
+    else if (ret == -1)
+    {
+
+    }
+    return CommErrorCode::readFail;
+  }
+
+  CommErrorCode QTcpSocketAdapter::write(int timeout, const char *data, int *n_bytes)
+  {
+    if (qint64 ret = m_socket.write(data, static_cast<qint64>(*n_bytes)) != -1)
+    {
+      if (m_socket.waitForBytesWritten(timeout))
+      {
+        return CommErrorCode::Ok;
+      }
+      else
+      {
+        return CommErrorCode::writeFail;
+      }
+    }
+    return CommErrorCode::writeFail;
   }
 }  //namespace COMMUNICATION

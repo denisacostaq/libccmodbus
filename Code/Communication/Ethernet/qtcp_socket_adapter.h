@@ -37,7 +37,7 @@ namespace COMMUNICATION {
 class QTcpSocketAdapter : public CommAdapterInterface
 {
   public:
-    QTcpSocketAdapter(QString remot_server, int remot_server_port);
+    QTcpSocketAdapter(QString host, int32_t host_port);
     ~QTcpSocketAdapter() = default;
 
     QTcpSocketAdapter(const QTcpSocketAdapter&) = delete;
@@ -46,14 +46,17 @@ class QTcpSocketAdapter : public CommAdapterInterface
     QTcpSocketAdapter(const QTcpSocketAdapter&&) = delete;
     QTcpSocketAdapter& operator=(const QTcpSocketAdapter&&) = delete;
 
-    CommErrorCode connect(int timeout) override;
-    CommErrorCode disconnect(int timeout) override;
+    CommErrorCode connect(int32_t timeout) override;
+    CommErrorCode disconnect(int32_t timeout) override;
     CommErrorCode read(int timeout, char *data, int *n_bytes) override;
+
+    //FIXME: como se si despues del waitForBytesWritten se escribieron todos,
+    //supongamos que si, en caso de que no, que solo algunos, como se cuantos??
     CommErrorCode write(int timeout, const char *data, int *n_bytes) override;
 
   private:
     QString m_server;
-    int m_server_port;
+    int32_t m_server_port;
 
     QTcpSocket m_socket;
 };

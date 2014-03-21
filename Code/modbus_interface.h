@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Thu Mar 20 10:26:04 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,18 +25,17 @@
     limitations under the License.
  */
 
-#include "Communication/Ethernet/tcp_socket.h"
+#ifndef MODBUS_INTERFACE_H
+#define MODBUS_INTERFACE_H
 
-namespace COMMUNICATION
+#include "Communication/comm_interface.h"
+
+namespace PROTOCOL
 {
-  TcpSocket::TcpSocket(QString host, int32_t host_port)
-    : m_tcp_socket {new QTcpSocketAdapter(host, host_port)}
-  {}
-
-  TcpSocket::~TcpSocket()
-  {
-    delete m_tcp_socket;
-  }
-
-
-}  //namespace COMMUNICATION
+class ModbusInterface
+{
+  public:
+    ModbusInterface();
+};
+}
+#endif // MODBUS_INTERFACE_H

@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Thu Mar 20 14:00:24 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,18 +25,17 @@
     limitations under the License.
  */
 
-#include "Communication/Ethernet/tcp_socket.h"
+#ifndef MODBUS_FACTORY_H
+#define MODBUS_FACTORY_H
 
-namespace COMMUNICATION
+#include "modbus_interface.h"
+
+namespace PROTOCOL {
+class ModbusFactory
 {
-  TcpSocket::TcpSocket(QString host, int32_t host_port)
-    : m_tcp_socket {new QTcpSocketAdapter(host, host_port)}
-  {}
-
-  TcpSocket::~TcpSocket()
-  {
-    delete m_tcp_socket;
-  }
-
-
-}  //namespace COMMUNICATION
+  public:
+    ModbusFactory() = default;
+    virtual ModbusInterface *build() = 0;
+};
+}
+#endif // MODBUS_FACTORY_H

@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:48:14 CDT 2014
+    \date Thu Mar 20 10:27:32 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,18 +25,29 @@
     limitations under the License.
  */
 
+#ifndef MODBUS_CLIENT_H
+#define MODBUS_CLIENT_H
+
+#include <string>
+
+#include "modbus_interface.h"
 #include "Communication/Ethernet/tcp_socket.h"
+#include "Communication/RTU/serial_portrs_232.h"
 
-namespace COMMUNICATION
+namespace PROTOCOL {
+class ModbusClient : public ModbusInterface
 {
-  TcpSocket::TcpSocket(QString host, int32_t host_port)
-    : m_tcp_socket {new QTcpSocketAdapter(host, host_port)}
-  {}
+  public:
+    ModbusClient(char* host, u_int16_t host_port);
 
-  TcpSocket::~TcpSocket()
-  {
-    delete m_tcp_socket;
-  }
+    ModbusClient(SERIAL_PORT::BaudRate baudrate,
+                 SERIAL_PORT::DataBits databits,
+                 SERIAL_PORT::Parity parity,
+                 SERIAL_PORT::StopBits stop_bits,
+                 SERIAL_PORT::FlowControl flow_control);
 
-
-}  //namespace COMMUNICATION
+  private:
+    COMMUNICATION::CommInterface *m_transport;
+};
+}
+#endif // MODBUS_CLIENT_H

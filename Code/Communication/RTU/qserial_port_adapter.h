@@ -1,6 +1,6 @@
 /*! \file TODO:
     \author Alvaro Denis Acosta Quesada <denisacostaq@gmail.com>
-    \date Tue Mar 18 19:36:07 CDT 2014
+    \date Thu Mar 20 23:08:14 CDT 2014
 
     \brief This file become from: TODO
 
@@ -25,34 +25,31 @@
     limitations under the License.
  */
 
-#ifndef COMMUNICATION_COMM_INTERFACE_H
-#define COMMUNICATION_COMM_INTERFACE_H
+#ifndef QSERIAL_PORT_ADAPTER_H
+#define QSERIAL_PORT_ADAPTER_H
 
-#include <cstdlib>
+#include <iostream>
+
+#include <QtSerialPort/QSerialPort>
 
 #include "Communication/comm_adapter_interface.h"
+#include "Communication/RTU/serial_port_enums.h"
 
 namespace COMMUNICATION
 {
-/*! \brief CommInterface is a common interface for \"all\" transport protocols
- * \brief The CommInterface class use a facade pattern.
- */
-class CommInterface
+class QSerialPortAdapter : public CommAdapterInterface
 {
   public:
-    CommInterface() = default;
-    virtual ~CommInterface() = default;
+    QSerialPortAdapter(SERIAL_PORT::BaudRate baudrate,
+                       SERIAL_PORT::DataBits databits,
+                       SERIAL_PORT::Parity parity,
+                       SERIAL_PORT::StopBits stop_bits,
+                       SERIAL_PORT::FlowControl flow_control);
 
-    CommInterface(const CommInterface&) = delete;
-    CommInterface& operator=(const CommInterface&) = delete;
-
-    CommInterface(const CommInterface&&) = delete;
-    CommInterface& operator=(const CommInterface&&) = delete;
-
-    virtual CommErrorCode connect(int timeout) = 0;
-    virtual CommErrorCode disconnect(int timeout) = 0;
-    virtual CommErrorCode read(int timeout, char *data, int *n_bytes) = 0;
-    virtual CommErrorCode write(int timeout, const char *data, int *n_bytes) = 0;
+    CommErrorCode connect(int32_t timeout) override;
+    CommErrorCode disconnect(int32_t timeout) override;
+    CommErrorCode read(int timeout, char *data, int *n_bytes) override;
+    CommErrorCode write(int timeout, const char *data, int *n_bytes) override;
 };
-}  //namespace COMMUNICATION
-#endif // COMMUNICATION_COMM_INTERFACE_H
+}
+#endif // QSERIAL_PORT_ADAPTER_H

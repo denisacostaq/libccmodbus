@@ -36,7 +36,7 @@ namespace COMMUNICATION
 class TcpSocket : public CommInterface
 {
   public:
-    TcpSocket(QString remot_server, int remot_server_port);
+    TcpSocket(QString host, int32_t host_port);
     ~TcpSocket();
 
     TcpSocket(const TcpSocket&) = delete;

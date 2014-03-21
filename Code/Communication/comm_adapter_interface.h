@@ -28,6 +28,8 @@
 #ifndef COMMUNICATION_COMM_ADAPTER_INTERFACE_H
 #define COMMUNICATION_COMM_ADAPTER_INTERFACE_H
 
+#include <cstdlib>
+
 #include "Communication/comm_error_code.h"
 
 namespace COMMUNICATION
